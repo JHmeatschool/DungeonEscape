@@ -19,8 +19,29 @@ void UMover::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	float MyFloat = 10.0f;
+	float* FloatPtr = &MyFloat;
+
+	float Result = *FloatPtr + 5.0f; // 15.0f
+	UE_LOG(LogTemp, Display, TEXT("Result: %f"), Result);
+
+	*FloatPtr = 30.0f;
+	UE_LOG(LogTemp, Display, TEXT("MyFloat: %f"), MyFloat);
+	UE_LOG(LogTemp, Display, TEXT("*FloatPtr: %f"), *FloatPtr);
+
+	UE_LOG(LogTemp, Display, TEXT("&MyFloat: %p"), &MyFloat);
+	UE_LOG(LogTemp, Display, TEXT("FloatPtr: %p"), FloatPtr);
+
+	// ---
+
+	FVector MyVector = FVector(1.0f, 1.0f, 1.0f);
+	FVector* VectorPtr = &MyVector;
+
+	(*VectorPtr).X = 2.0f;
+	VectorPtr->Y = 3.0f;
+	VectorPtr->Z = 4.0f;
+
+	UE_LOG(LogTemp, Display, TEXT("MyVector: %s"), *VectorPtr->ToCompactString());
 }
 
 
@@ -29,6 +50,6 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UE_LOG(LogTemp, Display, TEXT("Mover ticking..."));
+	
 }
 
