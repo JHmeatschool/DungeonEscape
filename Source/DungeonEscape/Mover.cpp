@@ -43,7 +43,7 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 
 	ReachedTarget = CurrentLocation.Equals(TargetLocation);
 
-	if (ReachedTarget == false)
+	if (!ReachedTarget)
 	{
 		float Speed = MoveOffset.Length() / MoveTime;
 
