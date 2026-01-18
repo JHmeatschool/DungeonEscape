@@ -13,10 +13,10 @@ void UTriggerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (MoverActor != nullptr)
+	if (MoverActor) //MoverActor != nullptr
 	{
 		Mover = MoverActor->FindComponentByClass<UMover>();
-		if (Mover != nullptr) 
+		if (Mover) //Mover != nullptr
 		{
 			UE_LOG(LogTemp, Display, TEXT("Successfully found the mover component!"));
 			Mover->ShouldMove = true;
