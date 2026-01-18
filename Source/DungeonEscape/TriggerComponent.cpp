@@ -46,16 +46,23 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UTriggerComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (Mover) 
+	if (OtherActor->ActorHasTag("PressurePlateActivator"))
 	{
-		Mover->ShouldMove = true;
+		if (Mover)
+		{
+			Mover->ShouldMove = true;
+		}
 	}
+
 }
 
 void UTriggerComponent::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (Mover)
+	if (OtherActor->ActorHasTag("PressurePlateActivator"))
 	{
-		Mover->ShouldMove = false;
+		if (Mover)
+		{
+			Mover->ShouldMove = false;
+		}
 	}
 }
