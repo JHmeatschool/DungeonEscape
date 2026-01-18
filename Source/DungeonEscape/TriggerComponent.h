@@ -13,6 +13,10 @@ UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class DUNGEONESCAPE_API UTriggerComponent : public UBoxComponent
 {
 	GENERATED_BODY()
+
+public:
+	// Sets default values for this component's properties
+	UTriggerComponent();
 	
 protected:
 	// Called when the game starts
