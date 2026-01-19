@@ -50,7 +50,7 @@ void UTriggerComponent::Trigger(bool NewTriggerValue)
 
 	if (Mover)
 	{
-		Mover->ShouldMove = IsTriggered;
+		Mover->SetShouldMove(IsTriggered);
 	}
 	else
 	{ 
@@ -62,7 +62,7 @@ void UTriggerComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AAct
 {
 	if (OtherActor && OtherActor->ActorHasTag("PressurePlateActivator"))
 	{
-		if (IsTriggered)
+		if (!IsTriggered)
 		{
 			Trigger(true);
 		}
