@@ -40,6 +40,9 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	bool IsTriggered = false;
 
+	UPROPERTY(VisibleAnywhere)
+	int32 ActivatorCount = 0;
+
 	UMover* Mover;
 
 	UFUNCTION()
@@ -47,6 +50,4 @@ public:
 
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-
 };
