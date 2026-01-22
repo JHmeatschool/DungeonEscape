@@ -70,7 +70,9 @@ void ADungeonEscapeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 void ADungeonEscapeCharacter::Interact()
 {
-	UE_LOG(LogTemp, Display, TEXT("INTERACT!"));
+	FVector Start = FirstPersonCameraComponent->GetComponentLocation();
+	FVector End = Start + (FirstPersonCameraComponent->GetForwardVector() * MaxInteractDistance);
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 5.0f);
 
 	//GetWorld()->SweepSingleByChannel();
 }
