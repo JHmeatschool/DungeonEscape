@@ -68,6 +68,13 @@ void ADungeonEscapeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 	}
 }
 
+void TestFunction(FVector& Vector)
+{
+	Vector.X = 100.0f;	
+	Vector.Y = 999.0f;	
+	Vector.Z = -390.0f;
+}
+
 void ADungeonEscapeCharacter::Interact()
 {
 	FVector Start = FirstPersonCameraComponent->GetComponentLocation();
@@ -78,18 +85,13 @@ void ADungeonEscapeCharacter::Interact()
 	DrawDebugSphere(GetWorld(), End, InteractionSphereRadius, 20, FColor::Blue, false, 5.0f);
 	DrawDebugSphere(GetWorld(), Start, InteractionSphereRadius, 20, FColor::Green, false, 5.0f);
 
-	FVector MyVec = FVector(1.0f, 2.0f, 3.0f);
-	FVector& VecRef = MyVec;
+	FVector TestVector = FVector(1.0f, 1.0f, 1.0f);
 
-	UE_LOG(LogTemp, Display, TEXT("MyVec: %s"), *MyVec.ToCompactString());
-	UE_LOG(LogTemp, Display, TEXT("VecRef: %s"), *VecRef.ToCompactString());
+	UE_LOG(LogTemp, Display, TEXT("TestVector: %s"), *TestVector.ToCompactString());
 
-	VecRef.X = 10.0f;
-	VecRef.Y = 20.0f;
-	VecRef.Z = 999.0f;
+	TestFunction(TestVector);
 
-	UE_LOG(LogTemp, Display, TEXT("MyVec: %s"), *MyVec.ToCompactString());
-	UE_LOG(LogTemp, Display, TEXT("VecRef: %s"), *VecRef.ToCompactString());
+	UE_LOG(LogTemp, Display, TEXT("TestVector: %s"), *TestVector.ToCompactString());
 
 	//GetWorld()->SweepSingleByChannel();
 }
