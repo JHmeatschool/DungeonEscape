@@ -97,5 +97,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	float MaxInteractDistance = 300.0f;
+
+	UPROPERTY(EditAnywhere)
+	float InteractionSphereRadius = 30.0f;
 };
 
