@@ -68,13 +68,6 @@ void ADungeonEscapeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 	}
 }
 
-void TestFunction(FVector& Vector)
-{
-	Vector.X = 100.0f;	
-	Vector.Y = 999.0f;	
-	Vector.Z = -390.0f;
-}
-
 void ADungeonEscapeCharacter::Interact()
 {
 	FVector Start = FirstPersonCameraComponent->GetComponentLocation();
@@ -83,17 +76,26 @@ void ADungeonEscapeCharacter::Interact()
 
 	FCollisionShape InteractionSphere = FCollisionShape::MakeSphere(InteractionSphereRadius);
 	DrawDebugSphere(GetWorld(), End, InteractionSphereRadius, 20, FColor::Blue, false, 5.0f);
-	DrawDebugSphere(GetWorld(), Start, InteractionSphereRadius, 20, FColor::Green, false, 5.0f);
 
-	FVector TestVector = FVector(1.0f, 1.0f, 1.0f);
+	FHitResult HitResult;
+	bool HasHit = GetWorld()->SweepSingleByChannel(
+		HitResult,
+		Start, End,
+		FQuat::Identity,
+		ECC_GameTraceChannel2,
+		InteractionSphere
+	);
 
-	UE_LOG(LogTemp, Display, TEXT("TestVector: %s"), *TestVector.ToCompactString());
+	if (HasHit)
+	{
+		AActor* HitActor = HitResult.GetActor();
+		UE_LOG(LogTemp, Display, TEXT("Shape trace hit actor %s"), *HitActor->GetActorNameOrLabel());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Display, TEXT("No actor hit!"));
+	}
 
-	TestFunction(TestVector);
-
-	UE_LOG(LogTemp, Display, TEXT("TestVector: %s"), *TestVector.ToCompactString());
-
-	//GetWorld()->SweepSingleByChannel();
 }
 
 
