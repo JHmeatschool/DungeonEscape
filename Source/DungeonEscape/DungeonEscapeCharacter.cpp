@@ -95,7 +95,7 @@ void ADungeonEscapeCharacter::Interact()
 		
 		if (HitActor->ActorHasTag("CollectableItem"))
 		{
-			// HitActor is a Collectable item
+			// HitActor is a Collectable itemdlfeks
 			ACollectableItem* CollectableItem = Cast<ACollectableItem>(HitActor);
 			if (CollectableItem)
 			{
@@ -110,7 +110,24 @@ void ADungeonEscapeCharacter::Interact()
 			ALock* LockActor = Cast<ALock>(HitActor);
 			if (LockActor)
 			{
-				UE_LOG(LogTemp, Display, TEXT("Lockactor with key item name %s!"), *LockActor->KeyItemName);
+				// 1 - Is the lock empty?
+				if (!LockActor->GetIsKeyPlaced())
+				{
+					// Lock is empty
+					int32 ItemRemoved = ItemList.RemoveSingle(LockActor->KeyItemName);
+					if (ItemRemoved)
+					{
+						LockActor->SetIsKeyPlaced(true);
+					}
+					else 
+					{
+						UE_LOG(LogTemp, Display, TEXT("Key item not in inventory"));
+					}
+				}
+
+				// 2 - Do we have the KeyItemName in our ItemList?
+				// 3 - Remove the item from our inventory if we have it
+				// 4 - Activate the lock
 			}
 		}
 	}
