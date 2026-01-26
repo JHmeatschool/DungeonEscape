@@ -22,6 +22,8 @@ void UMover::BeginPlay()
 	Super::BeginPlay();
 
 	StartLocation = GetOwner()->GetActorLocation();
+	OriginalRotation = GetOwner()->GetActorRotation();
+
 	SetShouldMove(false);
 }
 
@@ -43,6 +45,20 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 
 		GetOwner()->SetActorLocation(NewLocation);
 	}
+
+	FRotator TargetRotation = OriginalRotation;
+
+	if (ShouldMove)
+	{
+		TargetRotation = OriginalRotation + RotationOffset;
+	}
+
+	FRotator CurrentRotation = GetOwner()->GetActorRotation();
+	float RotateSpeed = RotationOffset.Euler().Size() / MoveTime;
+
+	FRotator NewRotation = FMath::RInterpConstantTo(CurrentRotation, TargetRotation, DeltaTime, RotateSpeed);
+
+	GetOwner()->SetActorRotation(NewRotation);
 }
 
 bool UMover::GetShouldMove()

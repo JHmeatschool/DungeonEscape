@@ -39,6 +39,11 @@ public:
 	bool GetShouldMove();
 	void SetShouldMove(bool NewShouldMove);
 
+	UPROPERTY(EditAnywhere)
+	FRotator RotationOffset;
+
+	FRotator OriginalRotation;
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	bool ShouldMove = false;
