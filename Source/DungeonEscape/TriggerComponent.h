@@ -50,4 +50,10 @@ public:
 
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	UPROPERTY(EditAnywhere)
+	bool IsOneShot = false;
+
+	UPROPERTY(EditAnywhere)
+	FName AcceptableActorTag;
 };

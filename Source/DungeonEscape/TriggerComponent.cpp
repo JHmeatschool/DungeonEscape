@@ -7,6 +7,7 @@ UTriggerComponent::UTriggerComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 
+	AcceptableActorTag = "PressurePlateActivator";
 }
 
 void UTriggerComponent::BeginPlay()
@@ -60,7 +61,7 @@ void UTriggerComponent::Trigger(bool NewTriggerValue)
 
 void UTriggerComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor && OtherActor->ActorHasTag("PressurePlateActivator"))
+	if (OtherActor && OtherActor->ActorHasTag(AcceptableActorTag))
 	{
 		ActivatorCount++; // Increase it by 1
 
@@ -73,7 +74,9 @@ void UTriggerComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AAct
 
 void UTriggerComponent::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (OtherActor && OtherActor->ActorHasTag("PressurePlateActivator"))
+	if (IsOneShot) return;
+
+	if (OtherActor && OtherActor->ActorHasTag(AcceptableActorTag))
 	{
 		ActivatorCount--; // Decrease it by 1
 
